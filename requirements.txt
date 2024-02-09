@@ -1,3 +1,11 @@
 pdf2image==1.16.0
 Pillow==8.2.0
+pynput==1.7.6
+pyobjc-core==10.1
+pyobjc-framework-ApplicationServices==10.1
+pyobjc-framework-Cocoa==10.1
+pyobjc-framework-CoreText==10.1
+pyobjc-framework-Quartz==10.1
+pyperclip==1.8.2
 pytesseract==0.3.7
+six==1.16.0
