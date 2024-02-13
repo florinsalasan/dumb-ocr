@@ -1,5 +1,5 @@
 import threading
-import _tkinter as tk
+from tkinter import *
 import pynput.mouse
 from pynput.mouse import Listener
 import subprocess
@@ -14,14 +14,12 @@ def create_overlay():
 
     # Create root window and set transparent background
     overlay = Tk()
-    overlay.attributes('-alpha', 0.5)  # Make semi-transparent
-    overlay.overrideredirect(True)  # Remove window decorations
+    screen_width = overlay.winfo_screenwidth()
+    screen_height = overlay.winfo_screenheight()
+    overlay.geometry(str(screen_width) + 'x' + str(screen_height))
+    overlay.attributes("-alpha", 0.1)
+    overlay.mainloop()
 
-    # Set dimensions (fullscreen by default)
-    overlay.geometry("+0+0")
-
-    # Start the window in background
-    overlay.mainloop(n=0)  # Don't block main script execution
     is_overlay_active = True
 
 
