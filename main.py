@@ -7,30 +7,33 @@ import time
 
 
 global overlay
+global count
+count = 0
 
-class MyException(Exception): pass
 
 def create_overlay():
     global is_overlay_active
+    global overlay
 
     # Create root window and set transparent background
     overlay = Tk()
     screen_width = overlay.winfo_screenwidth()
     screen_height = overlay.winfo_screenheight()
-    overlay.geometry(str(screen_width) + 'x' + str(screen_height))
+    overlay.geometry('{0}x{1}'.format(str(screen_width), str(screen_height)))
     print(screen_width, screen_height)
-    overlay.attributes("-alpha", 0.6)
+    overlay.attributes("-alpha", 0.5)
+    overlay.wm_attributes('-topmost', 1)
+    overlay.bg = Canvas(overlay, width=screen_width, height=screen_height, bg='white')
+    overlay.bg.pack()
+    overlay.mainloop()
 
     print("overlay active")
     is_overlay_active = True
-    with mouse.Listener(
-        on_move=on_move,
-        on_click=on_click) as listener:
-        try:
-            listener.join()
-        except MyException as e:
-            print('{0} was clicked'.format(e.args[0]))
     close_overlay_after_timeout(overlay)
+    listener = mouse.Listener(
+        on_move=on_move,
+        on_click=on_click)
+    listener.start()
 
 
 def close_overlay(overlay):
@@ -49,6 +52,7 @@ def close_overlay_after_timeout(overlay):
 
     # Timeout reached, close the overlay
     close_overlay(overlay)
+    print('about to stop inside timeout function')
     pynput.mouse.Listener.stop
 
 
@@ -57,15 +61,14 @@ def on_move(x, y):
 
 
 def on_click(x, y, button, pressed):
-    global count
-    if button == mouse.Button.left:
-        raise MyException(button)
-    print("{0} at {1}".format(
-          'Pressed' if pressed else 'Released', (x, y)))
-
+    global pressed_location
+    global released_location
+    print(pressed)
+    if pressed:
+        pressed_location = x, y
+    else:
+        released_location = x, y
+        print('You pressed at {0}x{1} and released at {2}x{3}'.format(*pressed_location, *released_location))
 
 
 create_overlay()
-
-
-
