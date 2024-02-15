@@ -8,6 +8,8 @@ import time
 
 global overlay
 
+class MyException(Exception): pass
+
 def create_overlay():
     global is_overlay_active
 
@@ -21,10 +23,13 @@ def create_overlay():
 
     print("overlay active")
     is_overlay_active = True
-    listener = mouse.Listener(
+    with mouse.Listener(
         on_move=on_move,
-        on_click=on_click)
-    listener.start()
+        on_click=on_click) as listener:
+        try:
+            listener.join()
+        except MyException as e:
+            print('{0} was clicked'.format(e.args[0]))
     close_overlay_after_timeout(overlay)
 
 
@@ -52,10 +57,11 @@ def on_move(x, y):
 
 
 def on_click(x, y, button, pressed):
+    global count
+    if button == mouse.Button.left:
+        raise MyException(button)
     print("{0} at {1}".format(
           'Pressed' if pressed else 'Released', (x, y)))
-    if not pressed:
-        return False
 
 
 
