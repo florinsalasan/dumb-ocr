@@ -34,20 +34,21 @@ class Selector:
     def stop_draw(self, event):
         if self.drawing:
             end_x, end_y = event.x, event.y
-            print(end_x, end_y)
             rectangle = self.canvas.create_rectangle(
                 self.start_x, self.start_y, end_x, end_y, outline="black", width=1,
             )
-            self.rectangles.append(rectangle)
             self.drawing = False
             self.coords['start_x'] = self.start_x
             self.coords['start_y'] = self.start_y
             self.coords['stop_x'] = end_x
             self.coords['stop_y'] = end_y
-            print(self.coords)
+            self.rectangles.append(self.coords)
+            self.root.destroy()
 
 
 if __name__ == '__main__':
     root = tk.Tk()
     app = Selector(root)
     root.mainloop()
+    print(app.rectangles)
+
