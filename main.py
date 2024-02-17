@@ -1,4 +1,6 @@
 import tkinter as tk
+from PIL import Image
+from PIL import ImageGrab
 
 
 class Selector:
@@ -52,3 +54,12 @@ if __name__ == '__main__':
     root.mainloop()
     print(app.rectangles)
 
+    # ImageGrab bbox is left, top, right, bottom values
+    ig_top = min(app.rectangles[0]['start_y'], app.rectangles[0]['stop_y'])
+    ig_bottom = max(app.rectangles[0]['start_y'], app.rectangles[0]['stop_y'])
+    ig_left = min(app.rectangles[0]['start_x'], app.rectangles[0]['stop_x'])
+    ig_right = max(app.rectangles[0]['start_x'], app.rectangles[0]['stop_x'])
+
+    # get the image using ImageGrab
+    selected_area = ImageGrab.grab(bbox=(ig_left, ig_top, ig_right, ig_bottom))
+    selected_area.save('ss.png')
