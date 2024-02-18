@@ -12,8 +12,11 @@ class Selector:
         self.screen_width = root.winfo_screenwidth()
         self.canvas = tk.Canvas(root, width=self.screen_width, height=self.screen_height, bg='white')
         self.canvas.pack()
+        print(self.screen_width, self.screen_height)
 
-        self.root.attributes('-alpha', 0.4)
+        self.root.attributes('-alpha', 0.2)
+
+        self.canvas.config(width=self.screen_width, height=self.screen_height)
 
         self.canvas.bind("<ButtonPress-1>", self.start_draw)
         self.canvas.bind("<ButtonRelease-1>", self.stop_draw)
@@ -40,10 +43,10 @@ class Selector:
                 self.start_x, self.start_y, end_x, end_y, outline="black", width=1,
             )
             self.drawing = False
-            self.coords['start_x'] = self.start_x
-            self.coords['start_y'] = self.start_y
-            self.coords['stop_x'] = end_x
-            self.coords['stop_y'] = end_y
+            self.coords['start_x'] = self.start_x * 2
+            self.coords['start_y'] = self.start_y * 2
+            self.coords['stop_x'] = end_x * 2
+            self.coords['stop_y'] = end_y * 2
             self.rectangles.append(self.coords)
             self.root.destroy()
 
@@ -62,4 +65,10 @@ if __name__ == '__main__':
 
     # get the image using ImageGrab
     selected_area = ImageGrab.grab(bbox=(ig_left, ig_top, ig_right, ig_bottom))
+    print(ig_top, ig_bottom, ig_left, ig_right)
     selected_area.save('ss.png')
+    # Used image grab to see what the real resolution of my screen was,
+    # noticed it was twice what tk was reporting so I scaled the self.coords
+    # by 2 and now it is grabbing the matching selected area by the user.
+    #img = ImageGrab.grab()
+    #print(img.size)
