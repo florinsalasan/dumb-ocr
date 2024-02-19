@@ -13,6 +13,16 @@ class Selector:
         self.canvas = tk.Canvas(root, width=self.screen_width, height=self.screen_height, bg='white')
         self.canvas.pack()
         print(self.screen_width, self.screen_height)
+        # Used image grab to see what the real resolution of my screen was,
+        # noticed it was twice what tk was reporting so I scaled the self.coords
+        # by 2 and now it is grabbing the matching selected area by the user.
+        img = ImageGrab.grab()
+        self.size = img.size
+        print('above is screen_width, below is self.size')
+        print(self.size)
+        self.width_ratio = self.size[0] / self.screen_width
+        self.height_ratio = self.size[1] / self.screen_height
+        print(self.width_ratio, self.height_ratio)
 
         self.root.attributes('-alpha', 0.2)
 
@@ -39,14 +49,14 @@ class Selector:
     def stop_draw(self, event):
         if self.drawing:
             end_x, end_y = event.x, event.y
-            rectangle = self.canvas.create_rectangle(
+            self.canvas.create_rectangle(
                 self.start_x, self.start_y, end_x, end_y, outline="black", width=1,
             )
             self.drawing = False
-            self.coords['start_x'] = self.start_x * 2
-            self.coords['start_y'] = self.start_y * 2
-            self.coords['stop_x'] = end_x * 2
-            self.coords['stop_y'] = end_y * 2
+            self.coords['start_x'] = self.start_x * self.width_ratio
+            self.coords['start_y'] = self.start_y * self.height_ratio
+            self.coords['stop_x'] = end_x * self.width_ratio
+            self.coords['stop_y'] = end_y * self.height_ratio
             self.rectangles.append(self.coords)
             self.root.destroy()
 
@@ -67,8 +77,3 @@ if __name__ == '__main__':
     selected_area = ImageGrab.grab(bbox=(ig_left, ig_top, ig_right, ig_bottom))
     print(ig_top, ig_bottom, ig_left, ig_right)
     selected_area.save('ss.png')
-    # Used image grab to see what the real resolution of my screen was,
-    # noticed it was twice what tk was reporting so I scaled the self.coords
-    # by 2 and now it is grabbing the matching selected area by the user.
-    #img = ImageGrab.grab()
-    #print(img.size)
