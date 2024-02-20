@@ -54,9 +54,9 @@ class Selector:
             )
             self.drawing = False
             self.coords['start_x'] = self.start_x * self.width_ratio
-            self.coords['start_y'] = self.start_y * self.height_ratio
+            self.coords['start_y'] = self.start_y * self.height_ratio + 140
             self.coords['stop_x'] = end_x * self.width_ratio
-            self.coords['stop_y'] = end_y * self.height_ratio
+            self.coords['stop_y'] = end_y * self.height_ratio + 140
             self.rectangles.append(self.coords)
             self.root.destroy()
 
