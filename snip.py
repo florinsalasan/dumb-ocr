@@ -9,6 +9,7 @@ class Selector:
 
         self.screen_height = root.winfo_screenheight()
         self.screen_width = root.winfo_screenwidth()
+        self.root.geometry(str(self.screen_width)+'x'+str(self.screen_height)+'+0+0')
         self.canvas = tk.Canvas(root, width=self.screen_width, height=self.screen_height, bg='white')
         self.canvas.pack()
         print(self.screen_width, self.screen_height)
