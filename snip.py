@@ -57,6 +57,7 @@ class Selector:
             self.coords['stop_y'] = end_y * self.height_ratio + 140
             self.rectangles.append(self.coords)
             self.root.destroy()
+            self.root.update()
 
 
 if __name__ == '__main__':

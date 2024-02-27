@@ -4,9 +4,9 @@ Trying to make OCR because I'm too lazy to type up ~50 different opcodes for my 
 
 ## TODO:
 
-[] Implement multi monitor usage, currently only works on main monitor\
-[] Allow for more complex ocr, only really tested this on typed content so far\
-[] Remove the overlaid white canvas on the selected area before generating the screen grab\
-[X] Do something with the extracted text that is more than printing to console, copying to clipboard could be a good start\
-[X] Ensure that the overlay is properly anchored in the top left and covering the entire screen\
-
+- [] Implement multi monitor usage, currently only works on main monitor\
+- [] Allow for more complex ocr, only really tested this on typed content so far\
+- [x] Remove the overlaid white canvas on the selected area before generating the screen grab\
+- [x] Do something with the extracted text that is more than printing to console, copying to clipboard could be a good start\
+- [x] Ensure that the overlay is properly anchored in the top left and covering the entire screen\
+- [] Live update the selected area? Unsure if needed or viable but highlighting the current selection would be neat.
