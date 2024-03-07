@@ -2,7 +2,7 @@
 
 Turn's out this is a built in functionality of macOS, but the idea is a snipping
 tool that then extracts the text and pastes it into your clipboard to be 
-pasted into whatever you want. Comes in 3 separate python scripts.\
+pasted into whatever you want. Comes in 3 separate python scripts.
 
 # snip.py
 Creates a fullscreen overlay that allows a user to click and drag to create
@@ -31,9 +31,10 @@ for your use case.
 
 ## TODO:
 
-- [] Implement multi monitor usage, currently only works on main monitor\
-- [] Allow for more complex ocr, only really tested this on typed content so far\
-- [x] Remove the overlaid white canvas on the selected area before generating the screen grab\
-- [x] Do something with the extracted text that is more than printing to console, copying to clipboard could be a good start\
-- [x] Ensure that the overlay is properly anchored in the top left and covering the entire screen\
-- [] Live update the selected area? Unsure if needed or viable but highlighting the current selection would be neat.
+- [ ] Implement multi monitor usage, currently only works on main monitor
+- [ ] Allow for more complex ocr, only really tested this on typed content so far
+- [x] Remove the overlaid white canvas on the selected area before generating the screen grab
+- [x] Do something with the extracted text that is more than printing to console, copying to clipboard could be a good start
+- [x] Ensure that the overlay is properly anchored in the top left and covering the entire screen
+- [ ] Live update the selected area? Unsure if needed or viable but highlighting the current selection would be neat.
+
