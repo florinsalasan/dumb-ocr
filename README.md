@@ -27,7 +27,9 @@ platforms mostly because of lack of access to the other platforms.\
 Secondly there is a vertical offset in the snip.py script due to weird 
 pixel location caused by the notch on my machine. Feel free to remove the
 offsets if you have a normal rectangular screen, or if they are not needed
-for your use case.
+for your use case. So something broke and now this script only works with the 
+default mac terminal, Alacritty doesn't seem to have the permissions to screen
+capture anymore even though I have allowed it so I'm a bit stumped.
 
 ## TODO:
 
